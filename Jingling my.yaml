@@ -128,7 +128,7 @@ profile:
 # ========================
 # 策略组定义
 # ========================
-default: &所有-智选
+default: &default
   type: select
   proxies:
     - 直连
@@ -147,25 +147,33 @@ proxy-groups:
 
   # 业务分流组
 
-  - {name: AI, <<: *default}
-  - {name: Meta AI, <<: *default}
-  - {name: Perplexity, <<: *default}
-  - {name: Stream Media, <<: *default}
-  - {name: GitHub, <<: *default}
-  - {name: Reddit, <<: *default}  
+  - {name: AI, <<: *所有-智选}
+  - {name: Meta AI, <<: *所有-智选}
+  - {name: Perplexity, <<: *所有-智选}
+  - {name: Stream Media, <<: *所有-智选}
+  - {name: GitHub, <<: *所有-智选}
+  - {name: Reddit, <<: *所有-智选}  
   - {name: Nvidia, <<: *default}
   - {name: Apple, <<: *default}
   - {name: Microsoft, <<: *default}
-  - {name: Games, <<: *default}
-  - {name: Crypto, <<: *default}
-  - {name: Test, <<: *default}
+  - {name: Games, <<: *所有-智选}
+  - {name: Crypto, <<: *所有-智选}
+  - {name: Test, <<: *所有-智选}
   - {name: Block, <<: *default}
-  - {name: 国外, <<: *default}
+  - {name: 国外, <<: *所有-智选}
   - {name: 国内, <<: *default}
-  - {name: 其他, <<: *default}  
+  - {name: 其他, <<: *所有-智选}  
 
   # 所有组
 
+  - name: 所有-故转
+    type: fallback
+    interval: 180
+    lazy: false
+    proxies:
+      - 所有-手选
+      - 所有-智选
+      
   - name: 所有-手选
     type: select
     include-all: true
