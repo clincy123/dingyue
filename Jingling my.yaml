@@ -189,7 +189,7 @@ proxy-groups:
 
   - name: 所有-故转
     type: fallback
-    interval: 180
+    interval: 5
     lazy: false
     proxies:
       - 所有-手选
@@ -219,7 +219,7 @@ proxy-groups:
 
   - name: 香港-故转
     type: fallback
-    interval: 180
+    interval: 5
     lazy: false
     proxies:
       - 香港-手选
@@ -249,7 +249,7 @@ proxy-groups:
 
   - name: 台湾-故转
     type: fallback
-    interval: 180
+    interval: 5
     lazy: false
     proxies:
       - 台湾-手选
@@ -277,7 +277,7 @@ proxy-groups:
 
   - name: 日本-故转
     type: fallback
-    interval: 180
+    interval: 5
     lazy: false
     proxies:
       - 日本-手选
@@ -305,7 +305,7 @@ proxy-groups:
 
   - name: 新加坡-故转
     type: fallback
-    interval: 180
+    interval: 5
     lazy: false
     proxies:
       - 新加坡-手选
@@ -333,7 +333,7 @@ proxy-groups:
 
   - name: 美国-故转
     type: fallback
-    interval: 180
+    interval: 5
     lazy: false
     proxies:
       - 美国-手选
@@ -362,7 +362,7 @@ proxy-groups:
   
   - name: 其他-故转
     type: fallback
-    interval: 180
+    interval: 5
     lazy: false
     proxies:
       - 其他-手选
