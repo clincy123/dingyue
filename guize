@@ -1,496 +1,381 @@
-# ========================
-# Clash-ALL 优化配置
-# ========================
+config config_subscribe
+	option enabled '1'
+	option name '精灵'
+	option address 'https://7u9q57ptyms.laoyao.ltd/api/v1/client/subscribe?token=8e05969cfb921341b4e1f491de19e961'
+	option sub_convert '1'
+	option template '0'
+	option custom_template_url 'https://github.moeyy.xyz/https://raw.githubusercontent.com/liandu2024/clash/refs/heads/main/proxy/clash-all-globe-noicon.ini'
+	option emoji 'false'
+	option udp 'true'
+	option skip_cert_verify 'false'
+	option sort 'false'
+	option node_type 'false'
+	option rule_provider 'false'
+	list ex_keyword '剩余'
+	list ex_keyword '异常'
+	list ex_keyword '官网'
+	list ex_keyword '失败'
+	list ex_keyword '到期'
+	list ex_keyword '0.1'
+	list ex_keyword '0.2'
+	list ex_keyword '0.3'
+	list ex_keyword '0.4'
+	list ex_keyword '0.5'
+  option sub_ua 'clash.meta'
+	option convert_address 'https://api.wcc.best/sub'
 
-# 机场节点订阅
-
-proxy-providers:
-
-  精灵:
-    url: "https://7u9q57ptyms.laoyao.ltd/api/v1/client/subscribe?token=8e05969cfb921341b4e1f491de19e961"
-    type: http
-    interval: 86400
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 180
-    proxy: 直连 
-
-  牛逼:
-    url: "https://zhuzhuzhu.whtjdasha.com/api/v1/client/subscribe?token=17e570b4b38585b0898afddece1f2a70"
-    type: http
-    interval: 86400
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 180
-    proxy: 直连  
-    
-   
-
-proxies:
-  - {name: 直连, type: direct}
-  - {name: 拒绝, type: reject}
-
-# ========================
-# 主要端口设置
-# ========================
-port: 7890
-socks-port: 7891
-redir-port: 7892
-mixed-port: 7893
-tproxy-port: 7895
-
-allow-lan: true
-mode: rule
-log-level: info
-
-external-controller: 0.0.0.0:9090
-# external-ui: ui
-# external-ui-name: zashboard
-# external-ui-url: https://gh-proxy.com/GitHub.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
-secret: "123456"
-
-# ========================
-# DNS 设置
-# ========================
-dns:
-  enable: true
-  listen: 0.0.0.0:7874
-  ipv6: true
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.20.0.1/16
-  nameserver:
-    - 223.5.5.5
-  fake-ip-filter:
-    - +.lan
-    - +.local
-    - geosite:cn
-# 快猫    
-    - +.quickcht3.club
-    - +.kuaimao2.club
-# 火烧 
-    - +.onesubv.site
-    - +.oneyyds.online
-    - +.fengyyds.site
-    - +.onemg.top    
-# 猫耳 
-    - +.zhunchuanpb.com
-    - +.sevenka.top
-# BestVPN 
-    - +.networklinkpro.net
-    - +.prosubnet02.eu
-# 小牛
-    - +.4yfu73r3a4kl.com
-    - +.xiaoniuyun.cc  
-# 硅谷
-    - +.huawei-cloud.shop
-    - +.huawei-cloud.vip
-    - +.gpt-agent.cc      
-# 无界
-    - +.acwct.cn
-    - +.472361.xyz
-# 冰云
-    - +.bingyun.ink   
-    - +.fafhjkah.xyz
-# 牛逼   
-    - +.66jc.top  
-    - +.jueduibupao.top  
-    
-    - +.ynhtbank.com
-    - +.qeayr.cn
-    - +.saojc.xyz   
-    - +.sssyun.xyz
-    - +.dler.cloud
-    - +.0tk8a3a1q4t94dler.com    
-    - +.aerianas.top
-    - +.gptacg.top
-
-ipv6: false
-
-# ========================
-# TUN 模块
-# ========================
-tun:
-  enable: true
-  stack: gvisor
-  device: utun
-  endpoint-independent-nat: true
-  auto-route: false
-  auto-detect-interface: false
-  auto-redirect: false
-  strict-route: false
-
-profile:
-  store-selected: true
-  store-fake-ip: true
-
-# ========================
-# 策略组定义
-# ========================
-default1: &default1
-  type: select
-  proxies:
-    - 直连
-    - 所有-故转
-    - 所有-智选
-    - 所有-手选
-    - 香港-智选
-    - 香港-故转
-    - 台湾-故转
-    - 日本-故转
-    - 新加坡-故转
-    - 美国-故转
-    - 其他-故转
-    - 拒绝
-
-# ========================
-# 策略组定义
-# ========================
-default: &default
-  type: select
-  proxies:
-    - 所有-故转
-    - 所有-智选
-    - 所有-手选
-    - 香港-智选
-    - 香港-故转
-    - 台湾-故转
-    - 日本-故转
-    - 新加坡-故转
-    - 美国-故转
-    - 其他-故转
-    - 直连
-    - 拒绝
-
-    
-proxy-groups:
-
-  # 业务分流组
-
-  - {name: AI, <<: *default}
-  - {name: Meta AI, <<: *default}
-  - {name: Perplexity, <<: *default}
-  - {name: Stream Media, <<: *default}
-  - {name: GitHub, <<: *default}
-  - {name: Reddit, <<: *default}  
-  - {name: Nvidia, <<: *default1}
-  - {name: Apple, <<: *default1}
-  - {name: Microsoft, <<: *default1}
-  - {name: Games, <<: *default}
-  - {name: Crypto, <<: *default}
-  - {name: Test, <<: *default}
-  - {name: Block, <<: *default}
-  - {name: 国外, <<: *default}
-  - {name: 国内, <<: *default1}
-  - {name: 其他, <<: *default}  
-
-  # 所有组
-
-  - name: 所有-故转
-    type: fallback
-    interval: 180
-    lazy: false
-    proxies:
-      - 所有-手选
-      - 所有-智选
-      
-  - name: 所有-手选
-    type: select
-    include-all: true
-    filter: "^((?!(直连|拒绝)).)*$"
-
-  - name: 所有-智选
-    type: smart
-    include-all: true
-    policy-priority: ".*牛逼.*:0.8;.*(香港|HK).*:1.2"
-    uselightgbm: true
-    collectdata: true
-    health-check: 
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 60
-      tolerance: 2
-    strategy: sticky-sessions
-    interval: 180
-    filter: "^((?!(直连|拒绝)).)*$"
-
-  # 香港组
-
-  - name: 香港-故转
-    type: fallback
-    interval: 180
-    lazy: false
-    proxies:
-      - 香港-手选
-      - 香港-智选
-  
-  - name: 香港-手选
-    type: select
-    include-all: true
-    filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
-    
-  - name: 香港-智选
-    type: smart
-    include-all: true
-    policy-priority: ".*牛逼.*:0.5"
-    uselightgbm: true
-    collectdata: true
-    health-check: 
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 60
-      tolerance: 2
-    strategy: sticky-sessions
-    interval: 180
-    filter: "(?=.*(广港|香港|HK|Hong Kong|🇭🇰|HongKong)).*$"
- 
-  # 台湾组
-
-  - name: 台湾-故转
-    type: fallback
-    interval: 180
-    lazy: false
-    proxies:
-      - 台湾-手选
-      - 台湾-智选
-  - name: 台湾-手选
-    type: select
-    include-all: true
-    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
-  - name: 台湾-智选
-    type: smart
-    include-all: true
-    policy-priority: ".*牛逼.*:0.5"
-    uselightgbm: true
-    collectdata: true
-    health-check: 
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 60
-      tolerance: 2
-    strategy: sticky-sessions
-    interval: 180
-    filter: "(?=.*(广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan)).*$"
-
-  # 日本组
-
-  - name: 日本-故转
-    type: fallback
-    interval: 180
-    lazy: false
-    proxies:
-      - 日本-手选
-      - 日本-智选
-  - name: 日本-手选
-    type: select
-    include-all: true
-    filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
-  - name: 日本-智选
-    type: smart
-    include-all: true
-    policy-priority: ".*牛逼.*:0.5"
-    uselightgbm: true
-    collectdata: true
-    health-check: 
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 60
-      tolerance: 2
-    strategy: sticky-sessions
-    interval: 180
-    filter: "(?=.*(广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan)).*$"
-
-  # 新加坡组
-
-  - name: 新加坡-故转
-    type: fallback
-    interval: 180
-    lazy: false
-    proxies:
-      - 新加坡-手选
-      - 新加坡-智选
-  - name: 新加坡-手选
-    type: select
-    include-all: true
-    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
-  - name: 新加坡-智选
-    type: smart
-    include-all: true
-    policy-priority: ".*牛逼.*:0.5"
-    uselightgbm: true
-    collectdata: true
-    health-check: 
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 60
-      tolerance: 2
-    strategy: sticky-sessions
-    interval: 180
-    filter: "(?=.*(广新|新加坡|SG|坡|狮城|🇸🇬|Singapore)).*$"
-
-  # 美国组
-
-  - name: 美国-故转
-    type: fallback
-    interval: 180
-    lazy: false
-    proxies:
-      - 美国-手选
-      - 美国-智选
-  - name: 美国-手选
-    type: select
-    include-all: true
-    filter: "(?=.*(广美|美|US|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|拉斯|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).*$"
-  - name: 美国-智选
-    type: smart
-    include-all: true
-    policy-priority: ".*牛逼.*:0.5"
-    uselightgbm: true
-    collectdata: true
-    health-check: 
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 60
-      tolerance: 2
-    strategy: sticky-sessions
-    interval: 180
-    filter: "(?=.*(广美|美|US|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|拉斯|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).*$"
+config config_subscribe
+	option enabled '1'
+	option name '牛逼'
+	option address 'https://zhuzhuzhu.whtjdasha.com/api/v1/client/subscribe?token=17e570b4b38585b0898afddece1f2a70'
+	option sub_convert '1'
+	option template '0'
+	option custom_template_url 'https://github.moeyy.xyz/https://raw.githubusercontent.com/liandu2024/clash/refs/heads/main/proxy/clash-all-globe-noicon.ini'
+	option emoji 'false'
+	option udp 'true'
+	option skip_cert_verify 'false'
+	option sort 'false'
+	option node_type 'false'
+	option rule_provider 'false'
+	list ex_keyword '剩余'
+	list ex_keyword '异常'
+	list ex_keyword '官网'
+	list ex_keyword '失败'
+	list ex_keyword '到期'
+	list ex_keyword '0.1'
+	list ex_keyword '0.2'
+	list ex_keyword '0.3'
+	list ex_keyword '0.4'
+	list ex_keyword '0.5'
+  option sub_ua 'clash.meta'
+	option convert_address 'https://api.wcc.best/sub'
 
 
-  # 其他组
-  
-  - name: 其他-故转
-    type: fallback
-    interval: 180
-    lazy: false
-    proxies:
-      - 其他-手选
-      - 其他-智选
-  - name: 其他-手选
-    type: select
-    include-all: true
-    filter: "^((?!(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|美|US|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|拉斯|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).)*$"
 
-  - name: 其他-智选
-    type: smart
-    include-all: true
-    policy-priority: ".*牛逼.*:0.5"
-    uselightgbm: true
-    collectdata: true
-    health-check: 
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 60
-      tolerance: 2
-    strategy: sticky-sessions
-    interval: 180
-    filter: "^((?!(直连|拒绝|广港|香港|HK|Hong Kong|🇭🇰|HongKong|广台|台湾|台灣|TW|Tai Wan|🇹🇼|🇨🇳|TaiWan|Taiwan|广日|日本|JP|川日|东京|大阪|泉日|埼玉|沪日|深日|🇯🇵|Japan|广新|新加坡|SG|坡|狮城|🇸🇬|Singapore|广美|美|US|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|拉斯|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).)*$"
+config dns_servers
+	option group 'nameserver'
+	option type 'udp'
+	option ip '211.139.29.150'
+	option enabled '0'
 
-# ========================
-# 规则引擎（rules）
-# ========================
-rules:
+config dns_servers
+	option group 'nameserver'
+	option type 'udp'
+	option ip '211.139.29.170'
+	option enabled '0'
 
-  - RULE-SET,TEST / Domain,Test
-  - RULE-SET,Block / Domain,Block  
-  - RULE-SET,GitHub / Domain,GitHub    
-  - RULE-SET,ChatGPT / Domain,AI
-  - RULE-SET,Claude / Domain,AI
-  - RULE-SET,Copilot / Domain,AI
-  - RULE-SET,Gemini / Domain,AI
-  - RULE-SET,Groq / Domain,AI
-  - RULE-SET,Grok / Domain,AI
-  - RULE-SET,Meta AI / Domain,Meta AI
-  - RULE-SET,Perplexity / Domain,Perplexity
-  - RULE-SET,Microsoft / Domain,Microsoft
-  - RULE-SET,Apple / Domain,Apple
-  - RULE-SET,Apple-CN / Domain,Apple  
-  - RULE-SET,OKX / Domain,Crypto
-  - RULE-SET,Bybit / Domain,Crypto
-  - RULE-SET,Binance / Domain,Crypto
-  - RULE-SET,TikTok / Domain,Stream Media
-  - RULE-SET,Netflix / Domain,Stream Media
-  - RULE-SET,Netflix / IP,Stream Media,no-resolve
-  - RULE-SET,Disney / Domain,Stream Media
-  - RULE-SET,Amazon / Domain,Stream Media
-  - RULE-SET,HBO / Domain,Stream Media
-  - RULE-SET,Crunchyroll / Domain,Stream Media
-  - RULE-SET,Popcorn / Domain,Stream Media  
-  - RULE-SET,Spotify / Domain,Stream Media
-  - RULE-SET,Steam / Domain,Games
-  - RULE-SET,Epic / Domain,Games
-  - RULE-SET,EA / Domain,Games
-  - RULE-SET,Blizzard / Domain,Games
-  - RULE-SET,UBI / Domain,Games
-  - RULE-SET,PlayStation / Domain,Games
-  - RULE-SET,Nintend / Domain,Games
-  - RULE-SET,Nvidia / Domain,Nvidia
-  - RULE-SET,Reddit / Domain,Reddit  
-  - RULE-SET,Proxy / Domain,国外
-  - RULE-SET,Globe / Domain,国外  
-  - RULE-SET,Direct / Domain,国内
-  - RULE-SET,China / Domain,国内
-  - RULE-SET,China / IP,国内,no-resolve
-  - RULE-SET,Private / Domain,国内
-  - MATCH,其他
+config dns_servers
+	option group 'nameserver'
+	option type 'udp'
+	option ip '222.172.200.68'
+	option enabled '0'
 
-# ========================
-# 规则集提供者
-# ========================
-rule-anchor:
-  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
-  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+config dns_servers
+	option group 'nameserver'
+	option type 'udp'
+	option ip '61.166.150.123'
+	option enabled '0'
 
-rule-providers:
-  TEST / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Check.list"}
-  ChatGPT / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/openai.mrs"}
-  Claude / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Claude/Claude.list"}
-  Meta AI / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/MetaAi.list"}
-  Perplexity / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/perplexity.mrs"}
-  Copilot / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Copilot.list"}
-  Gemini / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Gemini.list"}
-  GitHub / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/github.mrs"}
-  Amazon / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/amazon.mrs"}
-  Apple-CN / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple-cn.mrs"}
-  Apple / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/apple.mrs"} 
-  Microsoft / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/microsoft.mrs"}
-  OKX / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/okx.mrs"}
-  Bybit / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bybit.mrs"}
-  Binance / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/binance.mrs"}
-  TikTok / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/tiktok.mrs"}
-  Netflix / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/netflix.mrs"}
-  Netflix / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/netflix.mrs"}
-  Disney / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/disney.mrs"}
-  HBO / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/hbo.mrs"}
-  Spotify / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/spotify.mrs"}
-  Steam / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/steam.mrs"}
-  Epic / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Epic/Epic.list"}
-  EA / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/EA/EA.list"}
-  Blizzard / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Blizzard/Blizzard.list"}
-  UBI / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/UBI/UBI.list"}
-  PlayStation / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PlayStation/PlayStation.list"}
-  Nintend / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Nintendo/Nintendo.list"}
-  Proxy / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Proxy.list"}
-  Globe / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global.list"} 
-  Block / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Block.list"}
-  Nvidia / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Nvidia/Nvidia.list"}
-  Crunchyroll / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Crunchyroll.list"}
-  Reddit / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/reddit.mrs"}
-  Groq / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/groq.mrs"}
-  Grok / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Grok.list"}
-  Popcorn / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Popcorn.list"}
-  Direct / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/liandu2024/clash/refs/heads/main/list/Direct.list"}
-  Private / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/private.mrs"}
-  China / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/cn.mrs"}
-  China / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/cn.mrs"}
-#  Twitter / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/x.mrs"}
-#  WhatsApp / Domain: {<<: *class, url: "https://gh-proxy.com/raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Whatsapp/Whatsapp.list"}
-#  Facebook / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/facebook.mrs"}
-#  Telegram / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/telegram.mrs"}  
-#  Telegram / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/telegram.mrs"}
-#  Youtube / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/youtube.mrs"}  
-#  Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}  
-#  Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
-#  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
+config dns_servers
+	option type 'https'
+	option ip 'doh.pub/dns-query'
+	option group 'nameserver'
+	option enabled '0'
+
+config dns_servers
+	option type 'https'
+	option ip 'dns.alidns.com/dns-query'
+	option group 'nameserver'
+	option enabled '0'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '9.9.9.9'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '149.112.112.112'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '2620:fe::fe'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '2620:fe::9'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'nameserver'
+	option ip '8.8.8.8'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'nameserver'
+	option ip '8.8.4.4'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '2001:4860:4860::8888'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '2001:4860:4860::8844'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '2001:da8::666'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'dns.quad9.net'
+	option type 'tls'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'dns.google'
+	option type 'tls'
+
+config dns_servers
+	option enabled '0'
+	option group 'nameserver'
+	option ip '1.1.1.1'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'jp.tiar.app'
+	option type 'tls'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'dot.tiar.app'
+	option type 'tls'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'dns.quad9.net/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'dns.google/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'dns.cloudflare.com/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '1.1.1.1/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'public.dns.iij.jp/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'jp.tiar.app/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'jp.tiarap.org/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option type 'https'
+	option ip 'doh.dnslify.com/dns-query'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'dns.twnic.tw/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'dns.oszx.co/dns-query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip 'doh.applied-privacy.net/query'
+	option type 'https'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '172.18.2.2'
+	option type 'tcp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '172.18.2.2'
+	option type 'udp'
+
+config dns_servers
+	option enabled '0'
+	option group 'fallback'
+	option ip '172.18.2.2'
+	option type 'tls'
+
+config dns_servers
+	option type 'tcp'
+	option ip '223.5.5.5'
+	option enabled '0'
+	option group 'default'
+
+config dns_servers
+	option type 'tcp'
+	option ip '119.29.29.29'
+	option enabled '0'
+	option group 'default'
+
+config dns_servers
+	option type 'tcp'
+	option ip '114.114.114.114'
+	option enabled '0'
+	option group 'default'
+
+config openclash 'config'
+	option proxy_port '7892'
+	option tproxy_port '7895'
+	option mixed_port '7893'
+	option socks_port '7891'
+	option http_port '7890'
+	option dns_port '7874'
+	option enable '0'
+	option update '0'
+	option en_mode 'fake-ip-mix'
+	option auto_update '1'
+	option cn_port '9090'
+	option dashboard_password '123456'
+	option dashboard_forward_ssl '0'
+	option rule_source '0'
+	option enable_custom_dns '1'
+	option ipv6_enable '0'
+	option ipv6_dns '0'
+	option enable_custom_clash_rules '0'
+	option other_rule_auto_update '1'
+	option core_version 'linux-amd64'
+	option enable_redirect_dns '1'
+	option servers_if_update '0'
+	option servers_update '0'
+	option log_level '0'
+	option proxy_mode 'rule'
+	option intranet_allowed '0'
+	option disable_udp_quic '1'
+	option operation_mode 'fake-ip'
+	option enable_rule_proxy '1'
+	option redirect_dns '0'
+	option cachesize_dns '0'
+	option filter_aaaa_dns '0'
+	option small_flash_memory '0'
+	option interface_name '0'
+	option log_size '1024'
+	option tolerance '100'
+	option store_fakeip '1'
+	option custom_fallback_filter '0'
+	option custom_fakeip_filter '1'
+	option custom_host '0'
+	option custom_name_policy '0'
+	option stream_auto_select '0'
+	option bypass_gateway_compatible '0'
+	option github_address_mod '0'
+	option urltest_address_mod '0'
+	option urltest_interval_mod '180'
+	option delay_start '15'
+	option router_self_proxy '1'
+	option release_branch 'master'
+	option dashboard_type 'Meta'
+	option yacd_type 'Meta'
+	option append_default_dns '0'
+	option enable_respect_rules '0'
+	option geo_custom_url 'https://testingcf.jsdelivr.net/gh/alecthw/mmdb_china_ip_list@release/lite/Country.mmdb'
+	option chnr_custom_url 'https://ispip.clang.cn/all_cn.txt'
+	option chnr6_custom_url 'https://ispip.clang.cn/all_cn_ipv6.txt'
+	option config_reload '0'
+	option fakeip_range '198.19.0.1/16'
+	option keep_alive_interval '0'
+	option find_process_mode '0'
+	option global_client_fingerprint '0'
+	option geodata_loader 'standard'
+	option enable_geoip_dat '0'
+	option enable_meta_sniffer '1'
+	option enable_meta_sniffer_pure_ip '1'
+	option enable_meta_sniffer_custom '0'
+	option config_path '/etc/openclash/config/config.yaml'
+	option core_type 'Meta'
+	option skip_proxy_address '1'
+	option china_ip_route '1'
+	option lan_interface_name '0'
+	option geo_auto_update '1'
+	option geo_update_week_time '2'
+	option geo_update_day_time '4'
+	option geoip_auto_update '1'
+	option geosite_auto_update '1'
+	option chnr_auto_update '1'
+	option chnr_update_week_time '5'
+	option chnr_update_day_time '4'
+	option auto_restart '0'
+	option auto_restart_week_time '*'
+	option auto_restart_day_time '4'
+	option other_rule_update_week_time '1'
+	option other_rule_update_day_time '4'
+	option default_resolvfile '/tmp/resolv.conf.d/resolv.conf.auto'
+	option dnsmasq_noresolv '0'
+	option dnsmasq_resolvfile '/tmp/resolv.conf.d/resolv.conf.auto'
+	option geosite_update_week_time '4'
+	option geosite_update_day_time '4'
+	option geosite_custom_url 'https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat'
+	option enable_tcp_concurrent '1'
+	option config_auto_update_mode '0'
+	option config_update_week_time '*'
+	option auto_update_time '4'
+	option custom_fakeip_filter_mode 'blacklist'
+	option stack_type 'gvisor'
+	option disable_masq_cache '1'
+	option enable_custom_domain_dns_server '0'
+	option enable_unified_delay '1'
+	option geoip_update_week_time '3'
+	option geoip_update_day_time '4'
+	option geoip_custom_url 'https://testingcf.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat'
+	option create_config '0'
+	option append_wan_dns '1'
