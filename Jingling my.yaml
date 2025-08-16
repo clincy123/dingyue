@@ -189,7 +189,7 @@ proxy-groups:
 
   - name: 所有-故转
     type: fallback
-    interval: 5
+    interval: 180
     lazy: false
     proxies:
       - 所有-手选
@@ -203,7 +203,7 @@ proxy-groups:
   - name: 所有-智选
     type: smart
 include-all: true
-    # policy-priority: ".*牛逼.*:0.5;.*(香港|HK).*:1.2"
+    #policy-priority: ".*牛逼.*:0.5;.*(香港|HK).*:1.2"
     policy-priority: ".*牛逼.*:0.5"
     uselightgbm: true
     collectdata: true
@@ -220,7 +220,7 @@ include-all: true
 
   - name: 香港-故转
     type: fallback
-    interval: 5
+    interval: 180
     lazy: false
     proxies:
       - 香港-手选
@@ -250,7 +250,7 @@ include-all: true
 
   - name: 台湾-故转
     type: fallback
-    interval: 5
+    interval: 180
     lazy: false
     proxies:
       - 台湾-手选
@@ -278,7 +278,7 @@ include-all: true
 
   - name: 日本-故转
     type: fallback
-    interval: 5
+    interval: 180
     lazy: false
     proxies:
       - 日本-手选
@@ -306,7 +306,7 @@ include-all: true
 
   - name: 新加坡-故转
     type: fallback
-    interval: 5
+    interval: 180
     lazy: false
     proxies:
       - 新加坡-手选
@@ -334,7 +334,7 @@ include-all: true
 
   - name: 美国-故转
     type: fallback
-    interval: 5
+    interval: 180
     lazy: false
     proxies:
       - 美国-手选
@@ -363,7 +363,7 @@ include-all: true
   
   - name: 其他-故转
     type: fallback
-    interval: 5
+    interval: 180
     lazy: false
     proxies:
       - 其他-手选
