@@ -128,10 +128,11 @@ profile:
 # ========================
 # 策略组定义
 # ========================
-default: &default
+default: &default1  
   type: select
   proxies:
     - 直连
+    - 所有-故转
     - 所有-智选
     - 所有-手选
     - 香港-智选
@@ -143,6 +144,26 @@ default: &default
     - 其他-故转
     - 拒绝
 
+# ========================
+# 策略组定义
+# ========================
+default: &default 
+  type: select
+  proxies:
+    - 所有-故转
+    - 所有-智选
+    - 所有-手选
+    - 香港-智选
+    - 香港-故转
+    - 台湾-故转
+    - 日本-故转
+    - 新加坡-故转
+    - 美国-故转
+    - 其他-故转
+    - 直连
+    - 拒绝
+
+    
 proxy-groups:
 
   # 业务分流组
@@ -153,15 +174,15 @@ proxy-groups:
   - {name: Stream Media, <<: *default}
   - {name: GitHub, <<: *default}
   - {name: Reddit, <<: *default}  
-  - {name: Nvidia, <<: *default}
-  - {name: Apple, <<: *default}
-  - {name: Microsoft, <<: *default}
+  - {name: Nvidia, <<: *default1}
+  - {name: Apple, <<: *default1}
+  - {name: Microsoft, <<: *default1}
   - {name: Games, <<: *default}
   - {name: Crypto, <<: *default}
   - {name: Test, <<: *default}
   - {name: Block, <<: *default}
   - {name: 国外, <<: *default}
-  - {name: 国内, <<: *default}
+  - {name: 国内, <<: *default1}
   - {name: 其他, <<: *default}  
 
   # 所有组
