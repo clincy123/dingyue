@@ -128,7 +128,7 @@ profile:
 # ========================
 # 策略组定义
 # ========================
-default: &default
+default: &所有-智选
   type: select
   proxies:
     - 直连
