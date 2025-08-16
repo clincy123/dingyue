@@ -128,7 +128,7 @@ profile:
 # ========================
 # 策略组定义
 # ========================
-default1: &default1  
+default1: &default1
   type: select
   proxies:
     - 直连
@@ -147,7 +147,7 @@ default1: &default1
 # ========================
 # 策略组定义
 # ========================
-default: &default 
+default: &default
   type: select
   proxies:
     - 所有-故转
