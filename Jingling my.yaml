@@ -168,7 +168,7 @@ proxy-groups:
 
   # 业务分流组
 
-  - {name: YouTube, <<: *default}
+  - {name: Youtube, <<: *default}
   - {name: Telegram, <<: *default}
   - {name: Twitter, <<: *default}
   - {name: AI, <<: *default}
@@ -398,7 +398,7 @@ rules:
 
   - RULE-SET,TEST / Domain,Test
   - RULE-SET,Block / Domain,Block  
-  - RULE-SET,YouTube / Domain,YouTube
+  - RULE-SET,Youtube / Domain,Youtube
   - RULE-SET,Telegram / Domain,Telegram
   - RULE-SET,Twitter / Domain,Twitter
   - RULE-SET,GitHub / Domain,GitHub    
