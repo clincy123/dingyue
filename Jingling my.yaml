@@ -398,6 +398,9 @@ rules:
 
   - RULE-SET,TEST / Domain,Test
   - RULE-SET,Block / Domain,Block  
+  - RULE-SET,YouTube / Domain,YouTube
+  - RULE-SET,Telegram / Domain,Telegram
+  - RULE-SET,Twitter / Domain,Twitter
   - RULE-SET,GitHub / Domain,GitHub    
   - RULE-SET,ChatGPT / Domain,AI
   - RULE-SET,Claude / Domain,AI
