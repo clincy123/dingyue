@@ -178,7 +178,7 @@ proxy-groups:
   - {name: Apple, <<: *default1}
   - {name: Microsoft, <<: *default1}
   - {name: Games, <<: *default}
-  - {name: Crypto, <<: *default}
+  #- {name: Crypto, <<: *default}
   - {name: Test, <<: *default}
   - {name: Block, <<: *default}
   - {name: 国外, <<: *default}
