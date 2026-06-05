@@ -1,7 +1,7 @@
 config config_subscribe
 	option enabled '1'
-	option name '精灵'
-	option address 'https://7u9q57ptyms.laoyao.ltd/api/v1/client/subscribe?token=8e05969cfb921341b4e1f491de19e961'
+	option name '花云'
+	option address 'https://noban.huanyuyunvip.com/api/v1/client/subscribe?token=9fd7ecc134d616a741e6bd18c0a9b570'
 	option sub_convert '1'
 	option template '0'
 	option custom_template_url 'https://github.moeyy.xyz/https://raw.githubusercontent.com/liandu2024/clash/refs/heads/main/proxy/clash-all-globe-noicon.ini'
@@ -26,8 +26,8 @@ config config_subscribe
 
 config config_subscribe
 	option enabled '1'
-	option name '牛逼'
-	option address 'https://zhuzhuzhu.whtjdasha.com/api/v1/client/subscribe?token=17e570b4b38585b0898afddece1f2a70'
+	option name '寿司云'
+	option address 'https://get.sushi2.cloud/sushi/2c511022f1cd8e21a40ca84ed0cb107d'
 	option sub_convert '1'
 	option template '0'
 	option custom_template_url 'https://github.moeyy.xyz/https://raw.githubusercontent.com/liandu2024/clash/refs/heads/main/proxy/clash-all-globe-noicon.ini'
